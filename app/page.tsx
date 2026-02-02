@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 export default function Home() {
   // Replace these with your actual information
   const profile = {
-    name: "Hamza Ebipi",
+    name: "Hamza Ebipi (UKI)",
     title: "Head of Sales",
     company: "Oninova",
     phone: "+389 75 666 445",
