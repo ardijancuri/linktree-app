@@ -12,10 +12,10 @@ export default function Home() {
     phone: "+389 75 666 445",
     image: "/profile.jpg", // Add your profile image to public folder
     links: {
-      linkedin: "https://linkedin.com/in/yourprofile",
+      linkedin: "https://www.linkedin.com/company/oninovalabs/",
       instagram: "https://instagram.com/yourprofile",
       website: "https://oninova.com",
-      whatsapp: "https://wa.me/15550000000", // Replace with your WhatsApp number
+      whatsapp: "https://wa.me/+38975666445", // Replace with your WhatsApp number
     },
   };
 
@@ -77,14 +77,21 @@ export default function Home() {
     <div className="min-h-screen bg-white flex items-center justify-center p-6 relative">
       {/* Oninova Logo */}
       <div className="absolute top-6 left-6 z-10">
-        <Image
-          src="/oninova-logo.png"
-          alt="Oninova"
-          width={50}
-          height={50}
-          className="object-contain"
-          priority
-        />
+        <a
+          href="https://oninova.net"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block cursor-pointer hover:opacity-80 transition-opacity"
+        >
+          <Image
+            src="/oninova-logo.png"
+            alt="Oninova"
+            width={50}
+            height={50}
+            className="object-contain"
+            priority
+          />
+        </a>
       </div>
 
       {/* Language Switcher */}
@@ -132,7 +139,7 @@ export default function Home() {
         {/* Profile Section */}
         <div className="flex flex-col items-center text-center mb-8">
           {/* Profile Image */}
-          <div className="relative w-32 h-32 mb-6 rounded-full overflow-hidden border-4 border-black">
+          <div className="relative w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-black">
             <Image
               src={profile.image}
               alt={profile.name}
