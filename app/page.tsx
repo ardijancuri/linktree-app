@@ -6,10 +6,10 @@ import { useState, useEffect, useRef } from "react";
 export default function Home() {
   // Replace these with your actual information
   const profile = {
-    name: "Your Name",
-    title: "Sales Representative",
+    name: "Hamza Ebipi",
+    title: "Head of Sales",
     company: "Oninova",
-    phone: "+1 (555) 000-0000",
+    phone: "+389 75 666 445",
     image: "/profile.jpg", // Add your profile image to public folder
     links: {
       linkedin: "https://linkedin.com/in/yourprofile",
@@ -32,21 +32,21 @@ export default function Home() {
   // Translations
   const translations = {
     EN: {
-      title: "Sales Representative",
+      title: "Head of Sales",
       whatsapp: "Contact me on WhatsApp",
       website: "Visit Website",
       copyright: "© 2026",
       developedBy: "Developed by",
     },
     DE: {
-      title: "Vertriebsmitarbeiter",
+      title: "Vertriebsleiter",
       whatsapp: "Kontaktieren Sie mich auf WhatsApp",
       website: "Website besuchen",
       copyright: "© 2026",
       developedBy: "Entwickelt von",
     },
     FR: {
-      title: "Représentant Commercial",
+      title: "Directeur des Ventes",
       whatsapp: "Contactez-moi sur WhatsApp",
       website: "Visiter le site web",
       copyright: "© 2026",
@@ -75,6 +75,18 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-6 relative">
+      {/* Oninova Logo */}
+      <div className="absolute top-6 left-6 z-10">
+        <Image
+          src="/oninova-logo.png"
+          alt="Oninova"
+          width={50}
+          height={50}
+          className="object-contain"
+          priority
+        />
+      </div>
+
       {/* Language Switcher */}
       <div className="absolute top-6 right-6 z-10">
         <div className="relative" ref={dropdownRef}>
@@ -104,7 +116,7 @@ export default function Home() {
                     setCurrentLang(lang.code);
                     setIsLangOpen(false);
                   }}
-                  className={`w-full px-4 py-3 text-left font-semibold text-sm hover:bg-[#FFFB00] transition-colors ${
+                  className={`w-full px-4 py-3 text-left font-semibold text-sm hover:bg-[#FFFB00] transition-colors cursor-pointer ${
                     currentLang === lang.code ? "bg-gray-100" : "bg-white"
                   }`}
                 >
@@ -133,7 +145,7 @@ export default function Home() {
 
           {/* Name and Title */}
           <h1 className="text-3xl font-bold text-black mb-2">{profile.name}</h1>
-          <p className="text-xl font-semibold text-black mb-1">
+          <p className="text-xl font-semibold text-black">
             {t.title}
           </p>
           <p className="text-lg font-medium text-gray-700 mb-4">

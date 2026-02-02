@@ -9,8 +9,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Oninova - Sales Representative",
-  description: "Connect with me - Sales Representative at Oninova",
+  title: "Hamza Ebipi - Head of Sales | Oninova",
+  description: "Connect with me - Head of Sales at Oninova",
 };
 
 export default function RootLayout({
