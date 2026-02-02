@@ -13,8 +13,8 @@ export default function Home() {
     image: "/profile.jpg", // Add your profile image to public folder
     links: {
       linkedin: "https://www.linkedin.com/company/oninovalabs/",
-      instagram: "https://instagram.com/yourprofile",
-      website: "https://oninova.com",
+      instagram: "https://www.instagram.com/oninovalabs/",
+      website: "https://oninova.net",
       whatsapp: "https://wa.me/+38975666445", // Replace with your WhatsApp number
     },
   };
