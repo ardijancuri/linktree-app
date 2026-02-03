@@ -129,7 +129,7 @@ export default function Home() {
   return (
     <div className="bg-white">
       {/* Hero Section - Full Screen Height */}
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 relative">
+      <div className="min-h-screen flex flex-col p-6 relative">
         {/* Oninova Logo */}
         <div className="absolute top-6 left-6 z-10">
         <a
@@ -191,7 +191,7 @@ export default function Home() {
         </div>
       </div>
 
-      <main className="w-full max-w-md pt-16">
+      <main className="w-full max-w-md mx-auto flex-1 flex flex-col justify-center pt-16">
         {/* Profile Section */}
         <div className="flex flex-col items-center text-center mb-8">
           {/* Profile Image */}
@@ -271,8 +271,10 @@ export default function Home() {
           </a>
         </div>
 
+        </main>
+
         {/* Scroll Down Indicator */}
-        <div className="mt-14 flex flex-col items-center text-center text-black">
+        <div className="pb-6 flex flex-col items-center text-center text-black">
           <p className="text-sm font-medium mb-2">{t.scrollDown}</p>
           <svg
             width="24"
@@ -291,7 +293,6 @@ export default function Home() {
             />
           </svg>
         </div>
-      </main>
       </div>
 
       {/* Work Section - Pinterest Style */}
