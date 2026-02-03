@@ -191,7 +191,7 @@ export default function Home() {
         </div>
       </div>
 
-      <main className="w-full max-w-md pt-10">
+      <main className="w-full max-w-md pt-6">
         {/* Profile Section */}
         <div className="flex flex-col items-center text-center mb-8">
           {/* Profile Image */}
