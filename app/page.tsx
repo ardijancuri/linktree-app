@@ -270,7 +270,7 @@ export default function Home() {
         </div>
 
         {/* Scroll Down Indicator */}
-        <div className="mt-10 flex flex-col items-center text-center text-black">
+        <div className="mt-14 flex flex-col items-center text-center text-black">
           <p className="text-sm font-medium mb-2">{t.scrollDown}</p>
           <svg
             width="24"
