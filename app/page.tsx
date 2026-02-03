@@ -63,7 +63,7 @@ export default function Home() {
       whatsapp: "Contact me on WhatsApp",
       website: "Visit Website",
       work: "Recent Projects",
-      scrollDown: "Scroll down to see recent projects",
+      scrollDown: "Scroll down",
       copyright: "© 2026",
       developedBy: "Developed by",
     },
@@ -72,7 +72,7 @@ export default function Home() {
       whatsapp: "Kontaktieren Sie mich auf WhatsApp",
       website: "Website besuchen",
       work: "Aktuelle Projekte",
-      scrollDown: "Nach unten scrollen für aktuelle Projekte",
+      scrollDown: "Nach unten scrollen",
       copyright: "© 2026",
       developedBy: "Entwickelt von",
     },
@@ -81,7 +81,7 @@ export default function Home() {
       whatsapp: "Contactez-moi sur WhatsApp",
       website: "Visiter le site web",
       work: "Projets Récents",
-      scrollDown: "Faites défiler pour voir les projets récents",
+      scrollDown: "Faites défiler",
       copyright: "© 2026",
       developedBy: "Développé par",
     },
@@ -127,9 +127,11 @@ export default function Home() {
   }, [selectedImageIndex]);
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-6 relative">
-      {/* Oninova Logo */}
-      <div className="absolute top-6 left-6 z-10">
+    <div className="bg-white">
+      {/* Hero Section - Full Screen Height */}
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 relative">
+        {/* Oninova Logo */}
+        <div className="absolute top-6 left-6 z-10">
         <a
           href="https://oninova.net"
           target="_blank"
@@ -289,9 +291,12 @@ export default function Home() {
             />
           </svg>
         </div>
+      </main>
+      </div>
 
-        {/* Work Section - Pinterest Style */}
-        <div className="mt-16">
+      {/* Work Section - Pinterest Style */}
+      <div className="px-6 pb-6">
+        <div className="max-w-md mx-auto">
           <h2 className="text-2xl font-bold text-black mb-8 text-center">{t.work}</h2>
           <div className="columns-2 gap-3 space-y-3">
             {workProjects.map((project, index) => (
@@ -314,23 +319,23 @@ export default function Home() {
               </button>
             ))}
           </div>
-        </div>
 
-        {/* Footer */}
-        <div className="mt-12 text-center space-y-2">
-          <p className="text-sm text-gray-600">
-            {t.copyright} {t.developedBy}{" "}
-            <a
-              href="https://oninova.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-black font-semibold underline hover:text-gray-700 transition-colors"
-            >
-              Oninova
-            </a>
-          </p>
+          {/* Footer */}
+          <div className="mt-12 text-center space-y-2">
+            <p className="text-sm text-gray-600">
+              {t.copyright} {t.developedBy}{" "}
+              <a
+                href="https://oninova.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black font-semibold underline hover:text-gray-700 transition-colors"
+              >
+                Oninova
+              </a>
+            </p>
+          </div>
         </div>
-      </main>
+      </div>
 
       {/* Lightbox Modal */}
       {selectedImageIndex !== null && (
