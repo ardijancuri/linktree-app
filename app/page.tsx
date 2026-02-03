@@ -21,7 +21,34 @@ export default function Home() {
 
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState("EN");
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const goToPrevImage = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(selectedImageIndex === 0 ? workProjects.length - 1 : selectedImageIndex - 1);
+    }
+  };
+
+  const goToNextImage = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(selectedImageIndex === workProjects.length - 1 ? 0 : selectedImageIndex + 1);
+    }
+  };
+
+  const workProjects = [
+    { src: "/work/best-mobile.avif", orientation: "portrait" },
+    { src: "/work/burdemplastik.avif", orientation: "portrait" },
+    { src: "/work/cioccolatitaliani.avif", orientation: "portrait" },
+    { src: "/work/lesnamax.avif", orientation: "portrait" },
+    { src: "/work/marah.avif", orientation: "portrait" },
+    { src: "/work/monfrere.avif", orientation: "portrait" },
+    { src: "/work/pevalit.avif", orientation: "landscape" },
+    { src: "/work/premium-park.avif", orientation: "portrait" },
+    { src: "/work/tesorouno.avif", orientation: "portrait" },
+    { src: "/work/tiamo.avif", orientation: "portrait" },
+    { src: "/work/tonus.avif", orientation: "landscape" },
+  ];
 
   const languages = [
     { code: "EN", name: "English" },
@@ -35,6 +62,8 @@ export default function Home() {
       title: "Head of Sales",
       whatsapp: "Contact me on WhatsApp",
       website: "Visit Website",
+      work: "Recent Projects",
+      scrollDown: "Scroll down to see recent projects",
       copyright: "© 2026",
       developedBy: "Developed by",
     },
@@ -42,6 +71,8 @@ export default function Home() {
       title: "Vertriebsleiter",
       whatsapp: "Kontaktieren Sie mich auf WhatsApp",
       website: "Website besuchen",
+      work: "Aktuelle Projekte",
+      scrollDown: "Nach unten scrollen für aktuelle Projekte",
       copyright: "© 2026",
       developedBy: "Entwickelt von",
     },
@@ -49,6 +80,8 @@ export default function Home() {
       title: "Directeur des Ventes",
       whatsapp: "Contactez-moi sur WhatsApp",
       website: "Visiter le site web",
+      work: "Projets Récents",
+      scrollDown: "Faites défiler pour voir les projets récents",
       copyright: "© 2026",
       developedBy: "Développé par",
     },
@@ -72,6 +105,26 @@ export default function Home() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isLangOpen]);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (selectedImageIndex === null) return;
+
+      if (event.key === "ArrowLeft") {
+        goToPrevImage();
+      } else if (event.key === "ArrowRight") {
+        goToNextImage();
+      } else if (event.key === "Escape") {
+        setSelectedImageIndex(null);
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedImageIndex]);
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-6 relative">
@@ -136,7 +189,7 @@ export default function Home() {
         </div>
       </div>
 
-      <main className="w-full max-w-md">
+      <main className="w-full max-w-md pt-16">
         {/* Profile Section */}
         <div className="flex flex-col items-center text-center mb-8">
           {/* Profile Image */}
@@ -216,6 +269,53 @@ export default function Home() {
           </a>
         </div>
 
+        {/* Scroll Down Indicator */}
+        <div className="mt-10 flex flex-col items-center text-center text-black">
+          <p className="text-sm font-medium mb-2">{t.scrollDown}</p>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="animate-bounce"
+          >
+            <path
+              d="M12 5v14M5 12l7 7 7-7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+
+        {/* Work Section - Pinterest Style */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-black mb-8 text-center">{t.work}</h2>
+          <div className="columns-2 gap-3 space-y-3">
+            {workProjects.map((project, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedImageIndex(index)}
+                className="relative w-full rounded-xl overflow-hidden border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 cursor-pointer break-inside-avoid mb-3"
+              >
+                <div className={`relative w-full ${
+                  project.orientation === "landscape" ? "aspect-[4/3]" : "aspect-[3/4]"
+                }`}>
+                  <Image
+                    src={project.src}
+                    alt={`Work project ${index + 1}`}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-300"
+                    unoptimized
+                  />
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Footer */}
         <div className="mt-12 text-center space-y-2">
           <p className="text-sm text-gray-600">
@@ -231,6 +331,69 @@ export default function Home() {
           </p>
         </div>
       </main>
+
+      {/* Lightbox Modal */}
+      {selectedImageIndex !== null && (
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImageIndex(null)}
+        >
+          {/* Close Button */}
+          <button
+            onClick={() => setSelectedImageIndex(null)}
+            className="absolute top-6 right-6 text-white hover:text-[#FFFB00] transition-colors z-10"
+          >
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          {/* Previous Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrevImage();
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-[#FFFB00] transition-colors z-10 p-2"
+          >
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          {/* Next Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNextImage();
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-[#FFFB00] transition-colors z-10 p-2"
+          >
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          {/* Image Container */}
+          <div
+            className="relative max-w-4xl max-h-[80vh] w-full h-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={workProjects[selectedImageIndex].src}
+              alt={`Work project ${selectedImageIndex + 1}`}
+              fill
+              className="object-contain rounded-2xl"
+              unoptimized
+            />
+          </div>
+
+          {/* Image Counter */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-sm font-medium">
+            {selectedImageIndex + 1} / {workProjects.length}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
