@@ -9,13 +9,13 @@ export default function Home() {
     name: "Hamza Ebipi",
     title: "Head of Sales",
     company: "Oninova",
-    phone: "+389 75 666 445",
+    phone: "+49 174 4755795",
     image: "/profile.jpg", // Add your profile image to public folder
     links: {
       linkedin: "https://www.linkedin.com/company/oninovalabs/",
       instagram: "https://www.instagram.com/oninovalabs/",
       website: "https://oninova.net",
-      whatsapp: "https://wa.me/+38975666445", // Replace with your WhatsApp number
+      whatsapp: "https://wa.me/+491744755795", // Replace with your WhatsApp number
     },
   };
 
